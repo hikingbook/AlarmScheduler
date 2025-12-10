@@ -2,6 +2,7 @@ package com.carterchen247.alarmscheduler.extension
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import android.util.Log
 
 fun Bundle?.toMap(): Map<String, Any?> {
     if (this == null) {
@@ -9,7 +10,11 @@ fun Bundle?.toMap(): Map<String, Any?> {
     }
     val hashMap = HashMap<String, Any?>()
     keySet().forEach { key ->
-        hashMap[key] = get(key)
+        try {
+            hashMap[key] = get(key)
+        } catch (e: Exception) {
+            Log.e("BundleExtension", "Failed to get value for key $key", e)
+        }
     }
     return hashMap
 }
