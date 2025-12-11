@@ -9,12 +9,12 @@ fun Bundle?.toMap(): Map<String, Any?> {
         return emptyMap()
     }
     val hashMap = HashMap<String, Any?>()
-    keySet().forEach { key ->
-        try {
+    try {
+        keySet().forEach { key ->
             hashMap[key] = get(key)
-        } catch (e: Exception) {
-            Log.e("BundleExtension", "Failed to get value for key $key", e)
         }
+    } catch (e: Exception) {
+        Log.e("BundleExtension", "Failed to convert Bundle to Map", e)
     }
     return hashMap
 }
